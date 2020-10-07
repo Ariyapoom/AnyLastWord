@@ -1,3 +1,4 @@
+import 'package:anylastword/route/routes.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatefulWidget{
@@ -16,12 +17,37 @@ class _HomePageState extends State<Homepage>{
             Card(
               child:ListTile(
               title: Text("Home"),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.of(context).pushNamed(AppRoutes.home);
+              },
             ) ,
             )
           ],
         ),
       ),
-      body: Center(child: Text("Trash For Fun"),),
+      body: Container(
+        child: ListView(
+          children: [
+            Card(
+              child: ListTile(
+                title: Text("Show all list"),
+                onTap: (){
+                  Navigator.of(context).pushNamed(AppRoutes.showlist);
+                },
+              ),
+            ),
+            Card(
+              child: ListTile(
+                title: Text("Add new list"),
+                onTap: (){
+                  Navigator.of(context).pushNamed(AppRoutes.addlist);
+                },
+              ),
+            )
+          ],
+        ),
+      )
     );
   }
 }
