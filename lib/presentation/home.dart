@@ -9,13 +9,19 @@ class _HomePageState extends State<Homepage>{
     return Scaffold(
       appBar: AppBar(
         title: Text("Any Last Word"),
-        leading: RaisedButton(
-          child: Icon(Icons.menu),
-          onPressed: (){},
-          color: Colors.blue,
-        ),
-
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            Card(
+              child:ListTile(
+              title: Text("Home"),
+            ) ,
+            )
+          ],
+        ),
+      ),
+      body: Center(child: Text("Trash For Fun"),),
     );
   }
 }
