@@ -9,6 +9,7 @@ class ShowList extends StatefulWidget {
 }
 
 class _ShowListState extends State<ShowList> {
+  List<MyList> today ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +19,19 @@ class _ShowListState extends State<ShowList> {
       body: Container(
         child: BlocBuilder<ListCubit, List>(
           builder: (context, state) {
+            state.forEach((i) => {
+              if (i.listdate == DateTime.now()) {
+                 today.add(i)
+              }
+            });
             return ListView.builder(
               padding: const EdgeInsets.all(8),
-              itemCount: state.length,
+              itemCount: today.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   child: ListTile(
-                    title: Text(state[index].listname),
+                    title: Text(today[index].listname),
+                    trailing: Text(today[index].listdate.toString()),
                   ),
                 );
               },

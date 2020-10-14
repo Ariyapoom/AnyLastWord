@@ -20,7 +20,9 @@ class MyList {
 
 class ListCubit extends Cubit<List> {
   ListCubit() : super(List());
+  int count;
   void addlist(value) => state.add(value);
+
 }
 
 class MyApp extends StatelessWidget {
