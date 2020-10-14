@@ -14,11 +14,11 @@ void main() {
 
 class MyList {
   String listname;
-  String listdate;
-  MyList(this.listname,this.listdate);
+  DateTime listdate;
+  MyList(this.listname, this.listdate);
 }
-class ListCubit extends Cubit<List> {
 
+class ListCubit extends Cubit<List> {
   ListCubit() : super(List());
   void addlist(value) => state.add(value);
 }
