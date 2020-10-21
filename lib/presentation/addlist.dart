@@ -17,8 +17,13 @@ class _AddlistState extends State<AddList> {
         initialDate: DateTime.now(),
         firstDate: DateTime(2020),
         lastDate: DateTime(2050));
-    setState(() {});
+    setState(() {
+      if(newlist.listdate == null){
+        newlist.listdate = DateTime.now();
+      }
+    });
   }
+
 
   MyList newlist = new MyList(" ", DateTime.now());
 
@@ -46,16 +51,24 @@ class _AddlistState extends State<AddList> {
               Text("So, When ??"),
               Container(
                 child: RaisedButton(
+                  padding: EdgeInsets.fromLTRB(50, 30, 50, 30),
                   child: Text(formatter.format(newlist.listdate)),
                   onPressed: () => setdate(),
-                  color: Colors.blue,
+                  color: Colors.blueAccent,
                 ),
               ),
               Text("Are you sure ?!!"),
               Container(
                 child: RaisedButton(
-                  onPressed: () => context.bloc<ListCubit>().addlist(newlist),
+                  padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
+                  onPressed: (){this.setState(() {
+                     context.bloc<ListCubit>().addlist(newlist);
+                  });
+                  Navigator.pop(context);
+                  } 
+                  ,
                   child: Text("Add"),
+                  color: Colors.green,
                 ),
               )
             ],

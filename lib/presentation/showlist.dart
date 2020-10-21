@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../main.dart';
 
@@ -9,7 +10,8 @@ class ShowList extends StatefulWidget {
 }
 
 class _ShowListState extends State<ShowList> {
-  List<MyList> today ;
+  List<MyList> today =[];
+  final DateFormat formatter = DateFormat('dd-MMM-yyyy');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,19 +21,14 @@ class _ShowListState extends State<ShowList> {
       body: Container(
         child: BlocBuilder<ListCubit, List>(
           builder: (context, state) {
-            state.forEach((i) => {
-              if (i.listdate == DateTime.now()) {
-                 today.add(i)
-              }
-            });
             return ListView.builder(
               padding: const EdgeInsets.all(8),
-              itemCount: today.length,
+              itemCount: state.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   child: ListTile(
-                    title: Text(today[index].listname),
-                    trailing: Text(today[index].listdate.toString()),
+                    title: Text(state[index].listname),
+                    trailing: Text(formatter.format(state[index].listdate)),
                   ),
                 );
               },
