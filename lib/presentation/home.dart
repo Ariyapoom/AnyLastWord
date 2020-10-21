@@ -9,7 +9,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomePageState extends State<Homepage> {
-  List<MyList> today = [];
+  List<int> today = [];
   final DateFormat formatter = DateFormat('dd-MMM-yyyy');
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class _HomePageState extends State<Homepage> {
             state.forEach((i) => {
                   if (this.formatter.format(i.listdate) ==
                       formatter.format(DateTime.now()))
-                    {today.add(i)}
+                    {today.add(state.indexOf(i))}
                 });
             return ListView.builder(
               padding: const EdgeInsets.all(8),
@@ -85,9 +85,12 @@ class _HomePageState extends State<Homepage> {
                   return Card(
                     color: Colors.redAccent,
                     child: ListTile(
-                      title: Text(this.today[index-1].listname),
+                      title: Text(state[today[index-1]].listname),
                       trailing:
-                          Text(formatter.format(this.today[index-1].listdate)),
+                          Text(formatter.format(state[today[index-1]].listdate)),
+                          onTap: ()=>{
+                            Navigator.of(context).pushNamed(AppRoutes.showdetail)
+                          },
                     ),
                   );
                 }

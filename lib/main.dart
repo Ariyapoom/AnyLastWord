@@ -1,7 +1,9 @@
 import 'package:anylastword/list_observer.dart';
 import 'package:anylastword/presentation/addlist.dart';
+import 'package:anylastword/presentation/editlist.dart';
 import 'package:anylastword/presentation/home.dart';
 import 'package:anylastword/presentation/showlist.dart';
+import 'package:anylastword/presentation/showlistdetail.dart';
 import 'package:anylastword/route/routes.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +38,8 @@ class MyApp extends StatelessWidget {
           AppRoutes.home: (context) => Homepage(),
           AppRoutes.addlist: (context) => AddList(),
           AppRoutes.showlist: (context) => ShowList(),
+          AppRoutes.editlist: (context) => EditList(),
+          AppRoutes.showdetail: (context) => ShowListDetail()
         },
       ),
     );

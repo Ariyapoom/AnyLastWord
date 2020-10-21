@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class EditList extends StatefulWidget{
-  _EditList createState() =>_EditList();
+class ShowListDetail extends StatefulWidget{
+  _ShowListDetail createState() => _ShowListDetail();   
 }
-class _EditList extends State<EditList> {
+class _ShowListDetail extends State<ShowListDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold();
