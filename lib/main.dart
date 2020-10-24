@@ -16,6 +16,7 @@ void main() {
 
 class MyList {
   String listname;
+  String listdetail;
   DateTime listdate;
   MyList(this.listname, this.listdate);
 }
@@ -24,7 +25,6 @@ class ListCubit extends Cubit<List> {
   ListCubit() : super(List());
   int count;
   void addlist(value) => state.add(value);
-
 }
 
 class MyApp extends StatelessWidget {
@@ -39,9 +39,18 @@ class MyApp extends StatelessWidget {
           AppRoutes.addlist: (context) => AddList(),
           AppRoutes.showlist: (context) => ShowList(),
           AppRoutes.editlist: (context) => EditList(),
-          AppRoutes.showdetail: (context) => ShowListDetail()
         },
+        onGenerateRoute: _routeWithParam,
       ),
     );
+  }
+}
+
+Route _routeWithParam(RouteSettings settings) {
+  if (settings.name == AppRoutes.showdetail) {
+    final index = settings.arguments;
+    return MaterialPageRoute(builder: (context) {
+      return ShowListDetail(index);
+    });
   }
 }

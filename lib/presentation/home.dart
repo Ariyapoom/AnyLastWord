@@ -78,19 +78,26 @@ class _HomePageState extends State<Homepage> {
                     padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                     color: Colors.red,
                     alignment: Alignment.center,
-                    child: Text("Today you must do",style: TextStyle( fontSize: 30),),
+                    child: Text(
+                      "Today you must do",
+                      style: TextStyle(fontSize: 30),
+                    ),
                   );
-                } 
-                else {
+                } else {
                   return Card(
                     color: Colors.redAccent,
                     child: ListTile(
-                      title: Text(state[today[index-1]].listname),
-                      trailing:
-                          Text(formatter.format(state[today[index-1]].listdate)),
-                          onTap: ()=>{
-                            Navigator.of(context).pushNamed(AppRoutes.showdetail)
-                          },
+                      title: Text(state[today[index - 1]].listname),
+                      trailing: Text(
+                          formatter.format(state[today[index - 1]].listdate)),
+                      onTap: () => {
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.showdetail,
+                                arguments: index - 1)
+                            .then((value) => this.setState(() {
+                                  this.today = [];
+                                }))
+                      },
                     ),
                   );
                 }
@@ -101,13 +108,12 @@ class _HomePageState extends State<Homepage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: ()=>Navigator.of(context)
-                      .pushNamed(AppRoutes.addlist)
-                      .then((data) => {
-                            this.setState(() {
-                              this.today = [];
-                            })
-                          }),
+        onPressed: () =>
+            Navigator.of(context).pushNamed(AppRoutes.addlist).then((data) => {
+                  this.setState(() {
+                    this.today = [];
+                  })
+                }),
       ),
     );
   }

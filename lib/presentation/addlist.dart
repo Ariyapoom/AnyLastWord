@@ -18,18 +18,18 @@ class _AddlistState extends State<AddList> {
         firstDate: DateTime(2020),
         lastDate: DateTime(2050));
     setState(() {
-      if(newlist.listdate == null){
+      if (newlist.listdate == null) {
         newlist.listdate = DateTime.now();
       }
     });
   }
-
 
   MyList newlist = new MyList(" ", DateTime.now());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text("Add new list"),
         ),
@@ -48,6 +48,15 @@ class _AddlistState extends State<AddList> {
                   onChanged: (text) => {newlist.listname = text},
                 ),
               ),
+              Text("Give More Detail For That"),
+              Container(
+                alignment: Alignment.center,
+                width: 250,
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  onChanged: (text) => {newlist.listdetail = text},
+                ),
+              ),
               Text("So, When ??"),
               Container(
                 child: RaisedButton(
@@ -61,12 +70,12 @@ class _AddlistState extends State<AddList> {
               Container(
                 child: RaisedButton(
                   padding: EdgeInsets.fromLTRB(50, 10, 50, 10),
-                  onPressed: (){this.setState(() {
-                     context.bloc<ListCubit>().addlist(newlist);
-                  });
-                  Navigator.pop(context);
-                  } 
-                  ,
+                  onPressed: () {
+                    this.setState(() {
+                      context.bloc<ListCubit>().addlist(newlist);
+                    });
+                    Navigator.pop(context);
+                  },
                   child: Text("Add"),
                   color: Colors.green,
                 ),
