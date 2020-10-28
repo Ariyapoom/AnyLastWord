@@ -1,3 +1,4 @@
+import 'package:anylastword/route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,7 @@ class ShowList extends StatefulWidget {
 }
 
 class _ShowListState extends State<ShowList> {
-  List<MyList> today =[];
+  List<MyList> today = [];
   final DateFormat formatter = DateFormat('dd-MMM-yyyy');
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,18 @@ class _ShowListState extends State<ShowList> {
               itemCount: state.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
+                  color: state[index].done ? Colors.green : Colors.red,
                   child: ListTile(
-                    title: Text(state[index].listname),
-                    trailing: Text(formatter.format(state[index].listdate)),
-                  ),
+                      title: Text(state[index].listname),
+                      trailing: Text(formatter.format(state[index].listdate)),
+                      onTap: () => {
+                            Navigator.of(context)
+                                .pushNamed(AppRoutes.showdetail,
+                                    arguments: index)
+                                .then((value) => this.setState(() {
+                                      this.today = [];
+                                    }))
+                          }),
                 );
               },
             );

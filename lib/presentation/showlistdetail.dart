@@ -1,4 +1,5 @@
 import 'package:anylastword/main.dart';
+import 'package:anylastword/route/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,12 +97,33 @@ class _ShowListDetail extends State<ShowListDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   RaisedButton(
-                    onPressed: () => {},
-                    child: Text("Mark as Done!"),
+                    color: state[widget.index].done ? Colors.green : Colors.red,
+                    onPressed: () {
+                      state[widget.index].done = true;
+                      this.setState(() {});
+                    },
+                    child: state[widget.index].done
+                        ? Text("Done!")
+                        : Text("Mark as Done!"),
                   ),
                   RaisedButton(
-                    onPressed: () => {},
+                    color: Colors.yellow,
+                    onPressed: () => {
+                      Navigator.of(context)
+                          .pushNamed(AppRoutes.editlist,
+                              arguments: widget.index)
+                          .then((value) {
+                        if (value == false) {
+                          Navigator.pop(context);
+                        }
+                        this.setState(() {});
+                      })
+                    },
                     child: Text("Edit"),
+                  ),
+                  RaisedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text("Back"),
                   )
                 ],
               )

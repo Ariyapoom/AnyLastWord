@@ -76,7 +76,6 @@ class _HomePageState extends State<Homepage> {
                 if (index == 0) {
                   return Container(
                     padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                    color: Colors.red,
                     alignment: Alignment.center,
                     child: Text(
                       "Today you must do",
@@ -85,7 +84,7 @@ class _HomePageState extends State<Homepage> {
                   );
                 } else {
                   return Card(
-                    color: Colors.redAccent,
+                    color: state[index - 1].done ? Colors.green : Colors.red,
                     child: ListTile(
                       title: Text(state[today[index - 1]].listname),
                       trailing: Text(
