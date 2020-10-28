@@ -69,38 +69,39 @@ class _HomePageState extends State<Homepage> {
                       formatter.format(DateTime.now()))
                     {today.add(state.indexOf(i))}
                 });
-            return ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemCount: this.today.length + 1,
-              itemBuilder: (BuildContext context, int index) {
-                if (index == 0) {
-                  return Container(
+            return Column(
+              children: [
+                Container(
                     padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                     alignment: Alignment.center,
                     child: Text(
                       "Today you must do",
                       style: TextStyle(fontSize: 30),
                     ),
-                  );
-                } else {
-                  return Card(
-                    color: state[index - 1].done ? Colors.green : Colors.red,
-                    child: ListTile(
-                      title: Text(state[today[index - 1]].listname),
-                      trailing: Text(
-                          formatter.format(state[today[index - 1]].listdate)),
-                      onTap: () => {
-                        Navigator.of(context)
-                            .pushNamed(AppRoutes.showdetail,
-                                arguments: index - 1)
-                            .then((value) => this.setState(() {
-                                  this.today = [];
-                                }))
-                      },
-                    ),
-                  );
-                }
-              },
+                  ),
+                Column(
+                  children: <Widget>[
+                    for (var list in state)
+                      if (this.formatter.format(list.listdate) ==
+                          formatter.format(DateTime.now()))
+                        Card(
+                          color: list.done ? Colors.green : Colors.red,
+                          child: ListTile(
+                            title: Text(list.listname),
+                            trailing: Text(formatter.format(list.listdate)),
+                            onTap: () => {
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutes.showdetail,
+                                      arguments: state.indexOf(list))
+                                  .then((value) => this.setState(() {
+                                        this.today = [];
+                                      }))
+                            },
+                          ),
+                        )
+                  ],
+                )
+              ],
             );
           },
         ),

@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (_) => ListCubit(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           AppRoutes.home: (context) => Homepage(),
           AppRoutes.addlist: (context) => AddList(),

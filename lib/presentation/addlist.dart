@@ -39,7 +39,7 @@ class _AddlistState extends State<AddList> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text("What you want to do?!!"),
+              Text("What do you want to do?!!"),
               Container(
                 alignment: Alignment.center,
                 width: 250,
